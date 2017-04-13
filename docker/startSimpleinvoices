@@ -3,7 +3,9 @@
 
 MYSQL_NAME="mysqlcontainer"
 # todo.. change this to random
-MYSQL_ROOTPW="gwe12uhsetjs3r5890"
+MYSQL_ROOTPW="gwe12uhs"
+
+
 
 MYSQL_DATADIR="/Volumes/UserData/Documents/Buchhaltung/simpleinvoices/mysqldata"
 #SI_ROOT="/Volumes/UserData/Documents/Buchhaltung/simpleinvoices/"
