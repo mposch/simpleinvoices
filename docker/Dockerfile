@@ -9,6 +9,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 #checkout the reopsitory
+RUN echo test
 RUN rm -r /var/www/html && git clone --recursive https://github.com/mposch/simpleinvoices.git /var/www/html
 RUN chown -R www-data:www-data /var/www/html/tmp
 

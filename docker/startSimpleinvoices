@@ -1,7 +1,20 @@
 #!/bin/bash
 # start database
 
+########################
+# INSERT YOUR MAIL ACCOUNT HERE
+##########################
+ SMARTHOST_ADDRESS=mail.gmx.net
+ SMARTHOST_PORT=465
+ SMARTHOST_USER=matthias.posch@gmx.at
+ SMARTHOST_PASSWORD=Gmxmad78mod
+ SMARTHOST_ALIASES=*.mysmtp.com
+ ################################
+ 
+
+
 MYSQL_NAME="mysqlcontainer"
+SMTP_NAME="smtphost"
 # todo.. change this to random
 MYSQL_ROOTPW="gwe12uhs"
 
@@ -20,13 +33,18 @@ startme() {
 #make sure the data 
 mkdir -p $MYSQL_DATADIR
 mkdir -p $AUTOMYSQLBACKUP_DIR
+
+
 #start the smtp host
-docker run -d namshi/smtp --name smpt
+docker run --name $SMTP_NAME -e SMARTHOST_ADDRESS=$SMARTHOST_ADDRESS -e SMARTHOST_PORT=$SMARTHOST_PORT -e SMARTHOST_USER=$SMARTHOST_USER -e SMARTHOST_PASSWORD=$SMARTHOST_PASSWORD -e SMARTHOST_ALIASES=$SMARTHOST_ALIASES -d namshi/smtp 
+
+
 
 #start database
 docker run -v $MYSQL_DATADIR:/var/lib/mysql --name $MYSQL_NAME -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOTPW -d mysql:5.5
+
 # start Docker apache-php with simpleinvoices
-docker run --link smtp:smtp --link $MYSQL_NAME:mysql --name $SI_NAME -p 80:80 -d mposch/simpleinvoices 
+docker run --link $SMTP_NAME:smtp --link $MYSQL_NAME:mysql --name $SI_NAME -p 80:80 -d mposch/simpleinvoices 
  
 
 
@@ -43,7 +61,9 @@ stopme() {
 	docker stop $SI_NAME
 	docker stop $PHPMYADMIN_NAME
 	docker stop $AUTOMYSQLBACKUP_NAME
-	docker rm $MYSQL_NAME $SI_NAME $PHPMYADMIN_NAME $AUTOMYSQLBACKUP_NAME
+	docker stop $SMTP_NAME
+	docker rm $MYSQL_NAME $SI_NAME $PHPMYADMIN_NAME $AUTOMYSQLBACKUP_NAME $SMTP_NAME
+	
 }
 case "$1" in 
     start)   startme ;;

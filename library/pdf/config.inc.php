@@ -57,7 +57,7 @@ define('TTF_FONTS_REPOSITORY',HTML2PS_DIR."fonts/");
 // 'all' - embed all fonts
 // 'none' - do not embed any fonts
 // 'config' - whether font is embedded is determined by html2ps.config 'embed' attribute value for this font
-define('FONT_EMBEDDING_MODE', 'config');
+define('FONT_EMBEDDING_MODE', 'none');
 
 /**
  * Some constants you better not change.
