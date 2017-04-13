@@ -8,7 +8,7 @@
 *	 GPL v3 or above
 */
 
-$secure = true;
+$secure = false;
 
 if($secure)
 {
