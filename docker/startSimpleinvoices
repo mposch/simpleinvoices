@@ -19,12 +19,14 @@ mkdir -p $AUTOMYSQLBACKUP_DIR
 
 # Start the Simpleinvoices Stack
 startme() {
-docker run -v $MYSQL_DATADIR:/var/lib/mysql --name $MYSQL_NAME -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOTPW -d mysql:8
-# start Docker apache
-docker run --name $SI_NAME -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOTPW --link $MYSQL_NAME:mysql -p 80:80 -d mposch/simpleinvoices
+#docker run -v $MYSQL_DATADIR:/var/lib/mysql --name $MYSQL_NAME -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOTPW -d mysql:5.1
+# start Docker apache with simpleinvoices and mysql
+docker run --name $SI_NAME -p 80:80 -d mposch/simpleinvoices
+
 # start phpmyadmin
 docker run --name $PHPMYADMIN_NAME -d --link $MYSQL_NAME:db -p 8080:80 phpmyadmin/phpmyadmin
 docker run --name $AUTOMYSQLBACKUP_NAME --link $MYSQL_NAME:mysql -v $AUTOMYSQLBACKUP_DIR:/backup -e DBHOST=mysql -e USERNAME=root -e PASSWORD=$MYSQL_ROOTPW -e DBNAMES=all -e CRON_SCHEDULE="0 0 * * *"  -d selim13/automysqlbackup
+
 }
 
 stopme() {
