@@ -6,8 +6,8 @@
 ##########################
  SMARTHOST_ADDRESS=mail.gmx.net
  SMARTHOST_PORT=465
- SMARTHOST_USER=matthias.posch@gmx.at
- SMARTHOST_PASSWORD=Gmxmad78mod
+ SMARTHOST_USER=some.mail.address
+ SMARTHOST_PASSWORD=somepasswd
  SMARTHOST_ALIASES=*.mysmtp.com
  ################################
  
