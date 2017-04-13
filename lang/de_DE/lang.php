@@ -618,4 +618,11 @@ $LANG['title_module_preferences']		= "Einstellungen / Rechnungspräferenzen";//1
 $LANG['title_module_payment_types']		= "Einstellungen / Zahlungsarten";//1
 $LANG['title_view_index']				= "Dashboard";//1
 
+$LANG['invoice']                        = "Rechnung";//0
+$LANG['invoice_short']                  = "Re.";//0
+$LANG['project']                        = "Projekt";//0
+$LANG['timespan']                       = "Zeitraum";//0
+$LANG['transfer_please']                = "Bitte überweisen Sie den Betrag auf das angegebene Konto.";
+$LANG['thanks']                         = "Vielen Dank für den Auftrag!";
+$LANG['invoice_date']			= "Rechnungsdatum";
 ?>
