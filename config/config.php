@@ -27,7 +27,7 @@ export.pdf.bottommargin 			= 15
 local.locale	    				= en_GB
 local.precision		    			= 2
 
-email.host 				            = localhost
+email.host 				            = smtp
 email.smtp_auth			    		= false
 email.username			    		=  
 email.password 			    		= 

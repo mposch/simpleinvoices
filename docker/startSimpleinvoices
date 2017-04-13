@@ -20,11 +20,13 @@ startme() {
 #make sure the data 
 mkdir -p $MYSQL_DATADIR
 mkdir -p $AUTOMYSQLBACKUP_DIR
+#start the smtp host
+docker run -d namshi/smtp --name smpt
 
 #start database
 docker run -v $MYSQL_DATADIR:/var/lib/mysql --name $MYSQL_NAME -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOTPW -d mysql:5.5
 # start Docker apache-php with simpleinvoices
-docker run --link $MYSQL_NAME:mysql --name $SI_NAME -p 80:80 -d mposch/simpleinvoices 
+docker run --link smtp:smtp --link $MYSQL_NAME:mysql --name $SI_NAME -p 80:80 -d mposch/simpleinvoices 
  
 
 
